@@ -11,7 +11,7 @@ if(isset($_POST['username'])&& isset($_POST['password'])  )
 $username =$_POST['username'];
 $password =$_POST['password'];
 
-// Sanitize user input
+
 $username = mysqli_real_escape_string($conn, $username);
 $password = mysqli_real_escape_string($conn, $password);
 
@@ -33,8 +33,6 @@ if(empty($username)){
         else {
             echo "Error: " . $sql . "<br>" . mysqli_error($conn);
         }
-
-
     
 }
 ?>

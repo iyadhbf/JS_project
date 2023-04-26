@@ -1,26 +1,44 @@
+<?php session_start(); ?>
 <!DOCTYPE html>
 <html>
   <head>
     <meta charset="UTF-8" />
-    <title>My Awesome Websites</title>
+    <title>isikef website</title>
 
     <link rel="stylesheet" href="css/style.css" />
   </head>
   <body>
     <header>
+   
+   </div>
       <a id="logo" href="index.php">
         <img src="img/isik.png" alt="Logo" />
       </a>
-
-      <nav>
+      <?php
+     
+      if(isset($_SESSION["username"])){
+      $navbar='<nav>
         <ul>
-          <li><a href="presentation.html">Our Institute</a></li>
-          <li><a href="">Student Life</a></li>
-          <li><a href="forum.html">Forum</a></li>
-          <li><a href="login1.html">Sign in</a></li>
+          <li><a href="presentation.php">Our Institute</a></li>
+          <li><a href="studentlife.php">Student Life</a></li>
+          <li><a href="forum1.php">Forum</a></li>
+          <li><a href="logout.php">Logout</a></li>
+          <li><span> Hello, ' . $_SESSION["username"] . '</span></li>
         </ul>
-      </nav>
-    </header>
+      </nav>';
+      } else  {
+        $navbar='<nav>
+        <ul>
+          <li><a href="presentation.php">Our Institute</a></li>
+          <li><a href="studentlife.php">Student Life</a></li>
+          <li><a href="forum1.php">Forum</a></li>
+          <li><a href="login1.php">Sign in</a></li>
+        </ul>
+      </nav>';
+      }
+      echo $navbar;
+      ?>
+      </header>
 
     <main>
       <div class="contact">
@@ -69,24 +87,8 @@
           }
         </style>
 
-        <form action="#" method="post">
-          <label for="name">Name</label>
-          <input
-            type="text"
-            id="name"
-            name="name"
-            placeholder="Enter your name"
-            required
-          />
-
-          <label for="email">Email</label>
-          <input
-            type="email"
-            id="email"
-            name="email"
-            placeholder="Enter your email"
-            required
-          />
+        <form action="contactUs.php" method="POST">
+          
 
           <label for="subject">Subject</label>
           <input
@@ -98,14 +100,15 @@
           />
 
           <label for="message">Message</label>
-          <textarea
+          <input
+          type="text"
             id="message"
             name="message"
             placeholder="Enter your message"
             required
-          ></textarea>
+          ></input>
 
-          <input type="submit" value="Submit" />
+          <input type="submit" value="Submit" >
         </form>
       </div>
     </main>

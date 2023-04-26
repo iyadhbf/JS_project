@@ -1,34 +1,52 @@
-<?php
-if(isset($_POST["register"])){
-
-if(!empty($_POST['username']) && !empty($_POST['password'])) {
-	$username=$_POST['username'];
-	$password=$_POST['password'];
-
-	$con=mysql_connect('localhost','root','') or die(mysql_error());
-	mysql_select_db('user_registration') or die("cannot select DB");
-
-	$query=mysql_query("SELECT * FROM register WHERE username='".$username."'");
-	$numrows=mysql_num_rows($query);
-	if($numrows==0)
-	{
-	$sql="INSERT INTO register(username,password) VALUES('$username','$password')";
-
-	$result=mysql_query($sql);
-
-
-	if($result){
-	echo "Account Successfully Created";
-	} else {
-	echo "Failure!";
-	}
-
-	} else {
-	echo "That username already exists! Please try again with another.";
-	}
-
-} else {
-	echo "All fields are required!";
-}
-}
-?>
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Register</title>
+    <link rel="stylesheet" href="register.css" />
+    <link rel="stylesheet" href="ValidateForm.js" />
+    <link rel="stylesheet" href="css/style.css" />
+  </head>
+  <body>
+  <header>
+      <a id="logo" href="index.php">
+        <img src="img/isik.png" alt="Logo" />
+      </a>
+    <?php
+     
+      if(isset($_SESSION["username"])){
+      $navbar='<nav>
+        <ul>
+          <li><a href="presentation.php">Our Institute</a></li>
+          <li><a href="">Student Life</a></li>
+          <li><a href="forum.php">Forum</a></li>
+          <li><a href="logout.php">Logout</a></li>
+          <li><span>' . $_SESSION["username"] . '</span></li>
+        </ul>
+      </nav>';
+      } else  {
+        $navbar='<nav>
+        <ul>
+          <li><a href="presentation.php">Our Institute</a></li>
+          <li><a href="studentlife.php">Student Life</a></li>
+          <li><a href="forum1.php">Forum</a></li>
+          <li><a href="login1.php">Sign in</a></li>
+        </ul>
+      </nav>';
+      }
+      echo $navbar;
+      ?>
+      </header>
+    <form action="register1.php" method="POST">
+      <label for="username">Username:</label>
+      <input type="text" name="username" required />
+      <br />
+      <label for="password">Password:</label>
+      <input type="password" name="password" required />
+      <br />
+      <label for="confirm_password">Confirm Password:</label>
+      <input type="password" name="confirm_password" required />
+      <br />
+      <input type="submit" name="register" value="Register" />
+    </form>
+  </body>
+</html>

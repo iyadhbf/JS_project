@@ -1,10 +1,8 @@
 <?php
-session_start();
 include "cnx.php";
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-  $title = $_POST['post-title'];
-  $content = $_POST['post-content'];
-  $username = $_SESSION["username"];
+  $subject = $_POST['subject'];
+  $message = $_POST['message'];
 
    if (!$conn) {
     
@@ -13,23 +11,21 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     exit;
   }
 
-  if (empty($content) || empty($title)) {
+  if (empty($subject) || empty($message)) {
     
     
     echo 'Please fill in all fields.';
     exit;
   }
 
-  $sql1 = "INSERT INTO contact(content , username , title) VALUES ('$content','$username','$title')";
+  $sql1 = "INSERT INTO contact(subject,contact_message) VALUES ('$subject','$message')";
 
 
       if (mysqli_query($conn , $sql1)) {
-        echo "Your post has been submitted !";
+        echo "Thank you for contacting us!";
       }else {
         echo "Oops! Something went wrong. Please try again later.eazeaze";
       }
       mysqli_close($conn);
     }
 ?>
-
-	

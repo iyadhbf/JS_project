@@ -3,6 +3,7 @@
 <html>
   <head>
     <title>Login</title>
+    <link rel="stylesheet" href="css/style.css" />
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <style>
@@ -51,6 +52,35 @@
     </style>
   </head>
   <body>
+    <header>
+      <a id="logo" href="index.php">
+        <img src="img/isik.png" alt="Logo" />
+      </a>
+    <?php
+     
+      if(isset($_SESSION["username"])){
+      $navbar='<nav>
+        <ul>
+          <li><a href="presentation.php">Our Institute</a></li>
+          <li><a href="studentlife.php">Student Life</a></li>
+          <li><a href="forum1.php">Forum</a></li>
+          <li><a href="logout.php">Logout</a></li>
+          <li><span>' . $_SESSION["username"] . '</span></li>
+        </ul>
+      </nav>';
+      } else  {
+        $navbar='<nav>
+        <ul>
+          <li><a href="presentation.php">Our Institute</a></li>
+          <li><a href="studentlife.php">Student Life</a></li>
+          <li><a href="forum1.php">Forum</a></li>
+          <li><a href="login1.php">Sign in</a></li>
+        </ul>
+      </nav>';
+      }
+      echo $navbar;
+      ?>
+      </header>
     <div class="container">
       <h2>Login</h2>
 	  
@@ -74,7 +104,7 @@
         <button type="submit">Login</button>
         <div class="form-switch">
           Don't have an account?
-          <a href="register.html" onclick="toggleForm()">Register here</a>
+          <a href="register.php" onclick="toggleForm()">Register here</a>
         </div>
          
 				
